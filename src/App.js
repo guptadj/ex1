@@ -4,6 +4,7 @@ import Abt from './components/Abt';
 import Navbar from './components/Navbar';
 import Textform from './components/Textform';
 import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 
 function App() {
@@ -51,13 +52,35 @@ const [Theme, setTheme] = useState("light")
   return (
     <>
 
-        <Navbar tital="Divyanshu" abttxt="abt_txt" modetype={modetype} mode={mode} toogle={toogle} theme={theme}  />
-        <Alert alert={alert}/>
+        {/* /<Navbar tital="Divyanshu" abttxt="abt_txt" modetype={modetype} mode={mode} toogle={toogle} theme={theme}  /> */}
+         {/* <Alert alert={alert}/> */}
         {/* <Abt/> */}
-        <Textform Showalert={Showalert} heading="Entre Text to Analyse" mode={mode} Theme={Theme} /> 
- 
+        {/* <Textform Showalert={Showalert} heading="Entre Text to Analyse" mode={mode} Theme={Theme} />  */}
+        <BrowserRouter>
+        <Navbar tital="Divyanshu" abttxt="abt_txt" modetype={modetype} mode={mode} toogle={toogle} theme={theme}  />
         
+        <Alert alert={alert}/>
+        <div className="container my-3" mode={mode}>
+          <Routes>
+            <Route path="/Abt" element={<Abt />} />
+          </Routes>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Textform
+                 Showalert={Showalert}
+                  heading="Enter the text to analyze below"
+                  mode={mode}
+                  Theme={Theme}
+                />
+              }
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </>
+        
   );
 }
 
